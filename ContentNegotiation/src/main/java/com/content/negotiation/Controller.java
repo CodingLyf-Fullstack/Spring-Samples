@@ -22,6 +22,8 @@ public class Controller {
 	
 	
 	@GetMapping(path = "/content")
+	//localhost:8080/content?format=xml for XML response
+	//localhost:8080/content?format=json for JSON
 	public User getUserWithContentNegotiation() {
 
 		User user = new User();
