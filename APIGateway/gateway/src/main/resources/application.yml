@@ -1,0 +1,21 @@
+server:
+  port: 8080  # Port where the API Gateway will run
+
+spring:
+  application:
+    name: api-gateway  # Name of the application
+
+  cloud:
+    gateway:
+      server:
+        webmvc:  # Using Spring MVC stack for the gateway
+          routes:  # List of routes the gateway will handle
+            - id: product-service  # Unique identifier for this route
+              uri: http://localhost:8081  # The actual service URL where the request will be forwarded
+              predicates:
+                - Path=/products/**  # This route will handle any request that starts with /products
+
+            - id: order-service  # Unique identifier for the second route
+              uri: http://localhost:8082  # Forward requests to the Order Service
+              predicates:
+                - Path=/orders/**  # This route handles requests starting with /orders
