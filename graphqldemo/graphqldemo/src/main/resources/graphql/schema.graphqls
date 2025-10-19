@@ -1,0 +1,21 @@
+type User {
+  id: String
+  name: String
+  email: String
+  posts: [Post]
+}
+
+type Post {
+  id: String
+  title: String
+  comments: [Comment]
+}
+
+type Comment {
+  id: String
+  text: String
+}
+
+type Query {
+  user(id: String): User
+}
