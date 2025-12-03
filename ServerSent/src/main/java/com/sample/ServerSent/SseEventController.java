@@ -1,6 +1,8 @@
 package com.sample.ServerSent;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +28,10 @@ public class SseEventController {
 		 */
         Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> {
             try {
-                String status = "Updated status: " + System.currentTimeMillis();
+            	  LocalDateTime now = LocalDateTime.now();
+                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+                  String formattedDateTime = now.format(formatter);
+                String status = "Updated status: " + formattedDateTime;
                 emitter.send(SseEmitter.event().name("status-update").data(status));
             } catch (IOException e) {
                 emitter.completeWithError(e);
